@@ -1,0 +1,40 @@
+cliente = pyM.MongoClient('mongodb+srv://fabiogarciabio:Fabiogarcia91@fabiogarciapy.lspkcit.mongodb.net/?retryWrites=true&w=majority')
+
+db = cliente.tests
+
+bank_notes = {
+    'author' : 'Fabio de Souza Garcia',
+    'text' : 'My first bank applications based on python',
+    'tags' : ['Mongodb', 'python', 'bank', 'balance'],
+    'address' : 'Main street, n° 4862, New York - NY',
+    'account balance' : ['earnings : 4500', 'withdraws: 2800', 'total: 1700'],
+    'date' : datetime.datetime.utcnow()
+}
+
+post = db.posts
+post_id = post.insert_one(bank_notes).inserted_id
+print(post,'\n')
+
+print('\033[0:33m', db.posts.find_one(), '\n')
+
+print('\033[1;31m Informações referentes ao banco de dados:\033[0;32m\n')
+pprint.pprint(db.posts.find_one())
+
+new_notes = [{
+    'author': 'Marco Aristizabal',
+    'tags': ['investments', 'accounts'],
+    'account kinds': ['current', 'schedule', 'savings'],
+    'investiments options': ['national treasure', 'CDB', 'fixed income', 'startups']
+},
+    {
+        'author' : 'Fernanda Moreira',
+        'tags': ['new_startups', 'investments'],
+        'startup_options': ['bioMeat', 'Ecolab', 'LudoGames']
+    }
+]
+result = new_postID = post.insert_many(new_notes)
+print('\033[1;31m\nRecuperando informações referentes a novos dados: \033[0;32m\n')
+print(result.inserted_ids,'\n')
+
+print('\033[1;31m Recuperando informações:\033[0;32m')
+pprint.pprint(db.posts.find_one({'author':'Marco Aristizabal'}))
